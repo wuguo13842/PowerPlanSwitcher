@@ -114,16 +114,33 @@ internal static class ColorThemeHelper
 
     public static void ApplyToDataGridView(DataGridView grid)
     {
+        // 列头始终由 DataGridView 自绘，让 SortMode / 对齐 / 颜色等设置生效。
+        // 系统主题绘制时 SortMode 不生效，会在文字左侧预留排序箭头空间，
+        // 导致中文表头被挤到右边并截断。
+        //
+        // Always let DataGridView paint the column headers itself so SortMode,
+        // alignment and colors take effect. When the system theme paints them,
+        // SortMode is ignored and a sort glyph slot is reserved on the left,
+        // pushing CJK header text to the right and clipping it.
+        grid.EnableHeadersVisualStyles = false;
+
+        // 自绘列头时，选中态默认用系统高亮蓝。把普通态与选中态拉平，避免点
+        // 列头后出现蓝色残留。浅色和深色模式都套用。
+        //
+        // With themed drawing off, the selected header uses the highlight color
+        // by default. Flatten the normal and selection colors so clicking a
+        // header does not leave a blue bar. Applies to both color modes.
+        var headers = grid.ColumnHeadersDefaultCellStyle;
+        headers.BackColor = SystemColors.Control;
+        headers.ForeColor = SystemColors.ControlText;
+        headers.SelectionBackColor = SystemColors.Control;
+        headers.SelectionForeColor = SystemColors.ControlText;
+
         if (!Application.IsDarkModeEnabled)
         {
             return;
         }
 
-        grid.EnableHeadersVisualStyles = false;
-        grid.ColumnHeadersDefaultCellStyle.BackColor = SystemColors.Control;
-        grid.ColumnHeadersDefaultCellStyle.ForeColor = SystemColors.ControlText;
-        grid.ColumnHeadersDefaultCellStyle.SelectionBackColor = SystemColors.Control;
-        grid.ColumnHeadersDefaultCellStyle.SelectionForeColor = SystemColors.ControlText;
         grid.RowHeadersDefaultCellStyle.BackColor = SystemColors.Control;
         grid.RowHeadersDefaultCellStyle.ForeColor = SystemColors.ControlText;
         grid.BackgroundColor = SystemColors.Window;

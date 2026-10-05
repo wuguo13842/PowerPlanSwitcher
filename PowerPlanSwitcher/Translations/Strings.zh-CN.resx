@@ -145,7 +145,7 @@
     <value>关于...</value>
   </data>
   <data name="Menu_Close" xml:space="preserve">
-    <value>关闭电源计划切换器</value>
+    <value>退出程序</value>
   </data>
   <data name="Menu_ActivePrefix" xml:space="preserve">
     <value>(当前) </value>
@@ -187,7 +187,7 @@
     <value>右下角</value>
   </data>
   <data name="PopUpLocation_System" xml:space="preserve">
-    <value>跟随系统设置</value>
+    <value>跟随系统</value>
   </data>
   <data name="PopUpLocation_Center" xml:space="preserve">
     <value>居中</value>
@@ -295,10 +295,10 @@
     <value>规则顺序很重要：规则从上到下依次评估，第一个触发的规则会被应用。</value>
   </data>
   <data name="SettingsDlg_RdbCycleAll" xml:space="preserve">
-    <value>在所有电源计划中循环</value>
+    <value>所有计划中循环</value>
   </data>
   <data name="SettingsDlg_RdbCycleVisible" xml:space="preserve">
-    <value>仅在可见的电源计划中循环</value>
+    <value>仅可见计划中循环</value>
   </data>
   <data name="SettingsDlg_BtnSetCycleHotkey" xml:space="preserve">
     <value>设置快捷键</value>
@@ -316,7 +316,7 @@
     <value>导出日志为 zip</value>
   </data>
   <data name="SettingsDlg_TitleOpenPowerPlanSettings" xml:space="preserve">
-    <value>打开电源计划设置</value>
+    <value>打开电源设置</value>
   </data>
   <data name="SettingsDlg_MsgSelectPowerPlanFirst" xml:space="preserve">
     <value>请先选择一个电源计划。</value>
@@ -351,7 +351,7 @@
 上移/下移规则以更改优先级。</value>
   </data>
   <data name="ToastDlg_Title" xml:space="preserve">
-    <value>电源计划切换器已将电源计划切换为：</value>
+    <value>电源计划切换为：</value>
   </data>
   <data name="CreatePasswordDlg_Title" xml:space="preserve">
     <value>设置密码</value>
