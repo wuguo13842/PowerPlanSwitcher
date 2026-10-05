@@ -130,7 +130,7 @@
     <value>无规则生效</value>
   </data>
   <data name="Tray_Tooltip_Title" xml:space="preserve">
-    <value>电源计划切换器</value>
+    <value>PowerPlanSwitcher</value>
   </data>
   <data name="Tray_Tooltip_PowerPlan" xml:space="preserve">
     <value>电源计划</value>
@@ -205,7 +205,7 @@
     <value>确定(&amp;O)</value>
   </data>
   <data name="SettingsDlg_Title" xml:space="preserve">
-    <value>电源计划切换器 - 设置</value>
+    <value>PowerPlanSwitcher - 设置</value>
   </data>
   <data name="SettingsDlg_TabPowerSchemes" xml:space="preserve">
     <value>电源计划</value>
@@ -217,7 +217,7 @@
     <value>其他设置</value>
   </data>
   <data name="SettingsDlg_GroupHotkeyCycle" xml:space="preserve">
-    <value>循环切换电源计划的快捷键</value>
+    <value>循环切换计划快捷键</value>
   </data>
   <data name="SettingsDlg_GroupColorTheme" xml:space="preserve">
     <value>颜色主题</value>
@@ -256,10 +256,10 @@
     <value>新建规则</value>
   </data>
   <data name="SettingsDlg_BtnEditPowerRule" xml:space="preserve">
-    <value>编辑选中的规则</value>
+    <value>编辑规则</value>
   </data>
   <data name="SettingsDlg_BtnDeletePowerRule" xml:space="preserve">
-    <value>删除选中的规则</value>
+    <value>删除规则</value>
   </data>
   <data name="SettingsDlg_BtnAscentPowerRule" xml:space="preserve">
     <value>上移规则
@@ -298,7 +298,7 @@
     <value>所有计划中循环</value>
   </data>
   <data name="SettingsDlg_RdbCycleVisible" xml:space="preserve">
-    <value>仅可见计划中循环</value>
+    <value>可见计划中循环</value>
   </data>
   <data name="SettingsDlg_BtnSetCycleHotkey" xml:space="preserve">
     <value>设置快捷键</value>
@@ -373,7 +373,7 @@
     <value>剪贴板错误</value>
   </data>
   <data name="HotkeySelectionDlg_Title" xml:space="preserve">
-    <value>电源计划切换器 - 设置快捷键</value>
+    <value>PowerPlanSwitcher - 设置快捷键</value>
   </data>
   <data name="HotkeySelectionDlg_LblSelectedHotkey" xml:space="preserve">
     <value>已选快捷键：</value>
@@ -385,7 +385,7 @@
     <value>取消</value>
   </data>
   <data name="IconSelectionDlg_Title" xml:space="preserve">
-    <value>电源计划切换器 - 图标选择</value>
+    <value>PowerPlanSwitcher - 图标选择</value>
   </data>
   <data name="IconSelectionDlg_LblFilter" xml:space="preserve">
     <value>筛选：</value>
@@ -427,7 +427,7 @@
     <value>所有文件 (*.*)|*.*</value>
   </data>
   <data name="ProcessSelectionDlg_Title" xml:space="preserve">
-    <value>电源计划切换器 - 选择进程</value>
+    <value>PowerPlanSwitcher - 选择进程</value>
   </data>
   <data name="ProcessSelectionDlg_DgcPid" xml:space="preserve">
     <value>PID</value>
@@ -448,7 +448,7 @@
     <value>取消</value>
   </data>
   <data name="RuleDlg_Title" xml:space="preserve">
-    <value>电源计划切换器 - 规则</value>
+    <value>PowerPlanSwitcher - 规则</value>
   </data>
   <data name="RuleDlg_LblRuleType" xml:space="preserve">
     <value>选择规则类型：</value>
