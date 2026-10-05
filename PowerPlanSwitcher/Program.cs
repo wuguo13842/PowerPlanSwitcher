@@ -116,23 +116,23 @@ internal static class Program
         }
     }
 
-    // 卫星程序集被构建后移到 Lang\<culture>\ 下，ResourceManager 按默认约定找不到
-    // 它们。这里拦截程序集解析，从 Lang\ 加载。只处理本程序的资源程序集，其它
-    // 程序集保持默认解析行为。
+    // 卫星程序集被构建后移到 Lang\<culture>\ 下，ResourceManager 按默认约定
+    // 找不到它们。这里拦截程序集解析，从 Lang\ 加载。只处理 *.resources
+    // 程序集（本地化资源），其它程序集保持默认解析行为。
     //
     // Satellite assemblies are moved to Lang\<culture>\ by the build, so
     // ResourceManager cannot find them at the default location. Intercept
-    // assembly resolution and load from Lang\. Only handle this assembly's
-    // resource assemblies; leave everything else to the default resolver.
+    // assembly resolution and load from Lang\. Only *.resources assemblies
+    // (localization) are handled; everything else falls back to the default
+    // resolver.
     private static Assembly? ResolveSatelliteAssemblyFromLang(
         object? sender,
         ResolveEventArgs args)
     {
         var requested = new AssemblyName(args.Name);
-        if (!string.Equals(
-                requested.Name,
-                "PowerPlanSwitcher.resources",
-                StringComparison.Ordinal))
+        var name = requested.Name;
+        if (name is null
+            || !name.EndsWith(".resources", StringComparison.Ordinal))
         {
             return null;
         }
@@ -147,7 +147,7 @@ internal static class Program
             System.AppContext.BaseDirectory,
             "Lang",
             culture,
-            "PowerPlanSwitcher.resources.dll");
+            name + ".dll");
 
         return File.Exists(path)
             ? Assembly.LoadFrom(path)
