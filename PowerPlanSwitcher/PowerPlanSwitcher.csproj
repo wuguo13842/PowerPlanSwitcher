@@ -1,4 +1,4 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
+<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
     <OutputType>WinExe</OutputType>
     <TargetFramework>net10.0-windows</TargetFramework>
@@ -98,4 +98,32 @@ PowerPlanSwitcher is using the following tools, resources and libraries:
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
   </ItemGroup>
+
+  <!--
+    只移动本程序自己的卫星程序集（PowerPlanSwitcher.resources.dll），
+    第三方库（例如 Vanara 的 fr）保持原样。
+    Only move this assembly's satellite assemblies. Third-party satellite
+    assemblies (e.g. Vanara's fr) stay where they are.
+  -->
+  <Target Name="MoveSatelliteAssembliesToLang" AfterTargets="Build">
+    <ItemGroup>
+      <_SatelliteDlls Include="$(TargetDir)*\PowerPlanSwitcher.resources.dll" />
+    </ItemGroup>
+    <Move SourceFiles="@(_SatelliteDlls)"
+          DestinationFolder="$(TargetDir)Lang\%(_SatelliteDlls.RecursiveDir)"
+          Condition="'@(_SatelliteDlls)' != ''" />
+    <RemoveDir Directories="@(_SatelliteDlls->'%(RootDir)%(Directory)')"
+               Condition="'@(_SatelliteDlls)' != ''" />
+  </Target>
+
+  <Target Name="MoveSatelliteAssembliesToLangPublish" AfterTargets="Publish">
+    <ItemGroup>
+      <_PublishedSatelliteDlls Include="$(PublishDir)*\PowerPlanSwitcher.resources.dll" />
+    </ItemGroup>
+    <Move SourceFiles="@(_PublishedSatelliteDlls)"
+          DestinationFolder="$(PublishDir)Lang\%(_PublishedSatelliteDlls.RecursiveDir)"
+          Condition="'@(_PublishedSatelliteDlls)' != ''" />
+    <RemoveDir Directories="@(_PublishedSatelliteDlls->'%(RootDir)%(Directory)')"
+               Condition="'@(_PublishedSatelliteDlls)' != ''" />
+  </Target>
 </Project>
