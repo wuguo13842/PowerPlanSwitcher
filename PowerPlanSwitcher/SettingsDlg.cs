@@ -750,5 +750,10 @@ public partial class SettingsDlg : Form
 
     private void BtnExportLog_Click(object sender, EventArgs e) =>
         Program.ExportLog();
+
+    private void tableLayoutPanel4_Paint(object sender, PaintEventArgs e)
+    {
+
+    }
 }
 
