@@ -15,26 +15,63 @@ internal static class ColorThemeHelper
     private static readonly string WindowsColorThemeKey =
         @"SOFTWARE\Microsoft\Windows\CurrentVersion\Themes\Personalize";
 
-    private static readonly List<(string name, ColorTheme theme)> ColorThemes =
-    [
-        ( "Use System Setting", ColorTheme.System ),
-        ( "Light Mode", ColorTheme.Light ),
-        ( "Dark Mode", ColorTheme.Dark ),
-    ];
-
     private static SynchronizationContext? uiContext;
     private static int systemThemeApplyGeneration;
 
     public static event EventHandler? ApplicationColorModeChanged;
 
-    public static IEnumerable<string> GetDisplayNames() =>
-        ColorThemes.Select(ct => ct.name);
+    // 枚举 → 本地化显示名
+    // Enum -> localized display name
+    public static string GetDisplayName(ColorTheme theme) => theme switch
+    {
+        ColorTheme.System => Strings.ColorTheme_System,
+        ColorTheme.Light => Strings.ColorTheme_Light,
+        ColorTheme.Dark => Strings.ColorTheme_Dark,
+        _ => theme.ToString(),
+    };
 
-    public static ColorTheme GetSelectedColorTheme() =>
-        ColorThemes.FirstOrDefault(
-            ct => ct.name == Settings.Default.ColorTheme,
-            new("", ColorTheme.System))
-        .theme;
+    // 显示名列表（顺序与 GetColorThemes 一致）
+    // Display name list (order matches GetColorThemes)
+    public static IEnumerable<string> GetDisplayNames() =>
+        GetColorThemes().Select(GetDisplayName);
+
+    // 枚举列表，顺序固定
+    // Enum list, order is fixed
+    public static IList<ColorTheme> GetColorThemes() =>
+        Enum.GetValues<ColorTheme>();
+
+    // 读取已保存的枚举名；兼容旧版英文显示名
+    // Read saved enum name; compatible with legacy English display names
+    public static ColorTheme GetSelectedColorTheme()
+    {
+        var saved = Settings.Default.ColorTheme;
+        if (string.IsNullOrEmpty(saved))
+        {
+            return ColorTheme.System;
+        }
+
+        if (Enum.TryParse<ColorTheme>(saved, out var theme))
+        {
+            return theme;
+        }
+
+        // 兼容旧格式：英文显示名
+        // Legacy format: English display name
+        return saved switch
+        {
+            "Use System Setting" => ColorTheme.System,
+            "Light Mode" => ColorTheme.Light,
+            "Dark Mode" => ColorTheme.Dark,
+            _ => ColorTheme.System,
+        };
+    }
+
+    // 保存为枚举名（语言无关）
+    // Save as enum name (language independent)
+    public static void SetSelectedColorTheme(ColorTheme theme)
+    {
+        Settings.Default.ColorTheme = theme.ToString();
+    }
 
     public static ColorTheme GetActiveColorTheme()
     {
